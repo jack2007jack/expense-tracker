@@ -16,7 +16,14 @@
 # [!] Programmai jaglabā izdevumu stāvokli kad programma ir izslēgta palaista no jauna
 #
 
-expenses = []
+
+import json
+ 
+f = open('expenses.json',)
+expenses = json.load(f)
+f.close()
+
+
 
 # load expenses from expenses.json file here
 # https://www.geeksforgeeks.org/read-write-and-parse-json-using-python/ (Python read JSON file)
@@ -25,9 +32,16 @@ pass
 while True:
     command = input("\nChoose command:")
     if command == "1":
+        expenses_sum= {}
+        expenses_sum["name"]=input("write na chto tratil :") 
+        expenses_sum["sum"]=int(input("write summu plz :"))
+        expenses.append(expenses_sum)     
+        print(expenses)
         pass
     if command == "e":
         print("Exiting...")
+        with open("expenses.json", "w") as outfile:
+            json.dump(expenses, outfile)
         break
 
 # save expenses to expenses.json file here
